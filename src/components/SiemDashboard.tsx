@@ -1,31 +1,29 @@
 import { useState } from "react";
-import { Sidebar } from "@/components/ui/sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { GeoMap } from "./GeoMap";
 import { SecurityMetrics } from "./SecurityMetrics";
 import { AlertsFeed } from "./AlertsFeed";
 import { ThreatChart } from "./ThreatChart";
-import { 
-  Shield, 
-  AlertTriangle, 
-  Activity, 
-  Globe, 
-  Database, 
+import {
+  Shield,
+  AlertTriangle,
+  Activity,
+  Globe,
+  Database,
   Settings,
   Search,
-  Bell
+  Bell,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import LogsTable from "./recent-logs";
 
 const SiemDashboard = () => {
   const [activeView, setActiveView] = useState("dashboard");
 
   const sidebarItems = [
     { id: "dashboard", label: "Dashboard", icon: Activity },
-    { id: "threats", label: "Threat Map", icon: Globe },
     { id: "alerts", label: "Alerts", icon: AlertTriangle, badge: "12" },
     { id: "incidents", label: "Incidents", icon: Shield },
     { id: "logs", label: "Log Analysis", icon: Database },
@@ -42,7 +40,9 @@ const SiemDashboard = () => {
               <div className="w-8 h-8 bg-gradient-cyber rounded-lg flex items-center justify-center">
                 <Shield className="w-5 h-5 text-primary-foreground" />
               </div>
-              <h1 className="text-xl font-bold text-sidebar-foreground">SIEM Security</h1>
+              <h1 className="text-xl font-bold text-sidebar-foreground">
+                SIEM Security
+              </h1>
             </div>
 
             <nav className="space-y-2">
@@ -79,14 +79,14 @@ const SiemDashboard = () => {
                   {activeView}
                 </h2>
                 <p className="text-muted-foreground">
-                  Real-time security monitoring and threat detection
+                  Real-time security monitoring and threat
                 </p>
               </div>
               <div className="flex items-center gap-4">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <Input 
-                    placeholder="Search events..." 
+                  <Input
+                    placeholder="Search events..."
                     className="pl-10 w-64 bg-input/50 backdrop-blur-sm"
                   />
                 </div>
@@ -106,27 +106,9 @@ const SiemDashboard = () => {
                 <SecurityMetrics />
 
                 {/* Main Grid */}
-                <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 xl:grid-cols-1">
                   {/* Geo Map */}
-                  <Card className="xl:col-span-2 p-6 bg-card/50 backdrop-blur-sm shadow-card border border-border/50">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-lg font-semibold text-foreground">
-                        Global Threat Map
-                      </h3>
-                      <Badge variant="outline" className="text-xs">
-                        Live Data
-                      </Badge>
-                    </div>
-                    <GeoMap />
-                  </Card>
-
-                  {/* Alerts Feed */}
-                  <Card className="p-6 bg-card/50 backdrop-blur-sm shadow-card border border-border/50">
-                    <h3 className="text-lg font-semibold text-foreground mb-4">
-                      Recent Alerts
-                    </h3>
-                    <AlertsFeed />
-                  </Card>
+                  <LogsTable />
                 </div>
 
                 {/* Threat Analysis Chart */}
@@ -137,17 +119,6 @@ const SiemDashboard = () => {
                   <ThreatChart />
                 </Card>
               </div>
-            )}
-
-            {activeView === "threats" && (
-              <Card className="p-6 bg-card/50 backdrop-blur-sm shadow-card border border-border/50">
-                <h3 className="text-lg font-semibold text-foreground mb-4">
-                  Interactive Threat Map
-                </h3>
-                <div className="h-[calc(100vh-300px)]">
-                  <GeoMap />
-                </div>
-              </Card>
             )}
 
             {activeView === "alerts" && (
