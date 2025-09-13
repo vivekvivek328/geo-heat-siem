@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import LogsTable from "./recent-logs";
 import SIEMDashboard from "./siem-dashboard-component";
+import { HeatmapChart } from "./heatmap-chart";
 
 const SiemDashboard = () => {
   const [activeView, setActiveView] = useState("dashboard");
@@ -26,7 +27,7 @@ const SiemDashboard = () => {
   const sidebarItems = [
     { id: "dashboard", label: "Dashboard", icon: Activity },
     { id: "alerts", label: "Alerts", icon: AlertTriangle, badge: "12" },
-    { id: "incidents", label: "Incidents", icon: Shield },
+    { id: "heatmapChart", label: "Heatmap Chart", icon: Shield },
     { id: "logs", label: "Log Analysis", icon: Database },
     { id: "settings", label: "Settings", icon: Settings },
   ];
@@ -104,22 +105,22 @@ const SiemDashboard = () => {
             {activeView === "dashboard" && (
               <div className="space-y-6">
                 {/* Security Metrics */}
-                {/* <SecurityMetrics /> */}
+                <SecurityMetrics />
 
-                {/* Main Grid
+                {/* Main Grid */}
                 <div className="grid grid-cols-1 xl:grid-cols-1">
-                  Geo Map
+                  {/* Geo Map */}
                   <LogsTable />
-                </div> */}
+                </div>
 
                 {/* Threat Analysis Chart */}
-                {/* <Card className="p-6 bg-card/50 backdrop-blur-sm shadow-card border border-border/50">
+                <Card className="p-6 bg-card/50 backdrop-blur-sm shadow-card border border-border/50">
                   <h3 className="text-lg font-semibold text-foreground mb-4">
                     Threat Analysis Timeline
                   </h3>
                   <ThreatChart />
-                </Card> */}
-                <SIEMDashboard />
+                </Card>
+                {/* <SIEMDashboard /> */}
               </div>
             )}
 
@@ -131,6 +132,7 @@ const SiemDashboard = () => {
                 <AlertsFeed expanded />
               </Card>
             )}
+            {activeView === "heatmapChart" && <HeatmapChart />}
           </main>
         </div>
       </div>
