@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import LogsTable from "./recent-logs";
+import SIEMDashboard from "./siem-dashboard-component";
 
 const SiemDashboard = () => {
   const [activeView, setActiveView] = useState("dashboard");
@@ -103,21 +104,22 @@ const SiemDashboard = () => {
             {activeView === "dashboard" && (
               <div className="space-y-6">
                 {/* Security Metrics */}
-                <SecurityMetrics />
+                {/* <SecurityMetrics /> */}
 
-                {/* Main Grid */}
+                {/* Main Grid
                 <div className="grid grid-cols-1 xl:grid-cols-1">
-                  {/* Geo Map */}
+                  Geo Map
                   <LogsTable />
-                </div>
+                </div> */}
 
                 {/* Threat Analysis Chart */}
-                <Card className="p-6 bg-card/50 backdrop-blur-sm shadow-card border border-border/50">
+                {/* <Card className="p-6 bg-card/50 backdrop-blur-sm shadow-card border border-border/50">
                   <h3 className="text-lg font-semibold text-foreground mb-4">
                     Threat Analysis Timeline
                   </h3>
                   <ThreatChart />
-                </Card>
+                </Card> */}
+                <SIEMDashboard />
               </div>
             )}
 
